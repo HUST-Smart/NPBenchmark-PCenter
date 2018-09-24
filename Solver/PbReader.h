@@ -18,14 +18,14 @@
 #pragma warning(pop)
 
 
-namespace szx {
+namespace pb {
 
 template<typename T>
-std::string protobufToJson(const T &obj) {
+std::string protobufToJson(const T &obj, bool pretty = true) {
     std::string data;
 
     google::protobuf::util::JsonPrintOptions options;
-    options.add_whitespace = true;
+    options.add_whitespace = pretty;
     options.always_print_primitive_fields = true;
     options.preserve_proto_field_names = true;
 

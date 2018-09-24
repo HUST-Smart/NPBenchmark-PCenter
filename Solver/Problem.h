@@ -24,11 +24,27 @@ namespace szx {
 class Problem {
     #pragma region Type
 public:
-    using Input = pb::GateAssignment::Input;
+    struct Input : public pb::GateAssignment::Input {
+        bool load(const String &path) { return pb::load(path, *this); }
+    };
 
     struct Output : public pb::GateAssignment::Output {
-    public:
-        bool save(const String &path) const { return saveOutput(path, *this); }
+        bool save(const String &path, pb::Submission &submission) const {
+            std::ofstream ofs(path);
+            if (!ofs.is_open()) { return false; }
+
+            // TODO[szx][0]: fill the submission information.
+            submission.set_author("szx");
+            submission.set_cpu("Intel Core i5-7400 3.00GHz");
+            submission.set_ram("16G 2400MHz");
+            submission.set_language("C++");
+            submission.set_compiler("VS2017");
+            submission.set_os("Windows 10");
+            submission.set_problem("GateAssignment");
+
+            ofs << protobufToJson(submission, false) << std::endl << protobufToJson(*this);
+            return true;
+        }
 
         ID flightNumOnBridge = 0;
     };
@@ -51,8 +67,6 @@ public:
 
     #pragma region Method
 public:
-    static bool loadInput(const String &path, Input &input) { return load(path, input); }
-    static bool saveOutput(const String &path, const Output &output) { return save(path, output); }
     #pragma endregion Method
 
     #pragma region Field

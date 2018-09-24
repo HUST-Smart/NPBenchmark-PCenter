@@ -35,7 +35,7 @@ int Solver::Cli::run(int argc, char * argv[]) {
         { LogPathOption(), nullptr }
     });
 
-    for (int i = 1; i < argc; ++i) {    // skip executable name.
+    for (int i = 1; i < argc; ++i) { // skip executable name.
         auto mapIter = optionMap.find(argv[i]);
         if (mapIter != optionMap.end()) { // option argument.
             mapIter->second = argv[++i];
@@ -62,13 +62,19 @@ int Solver::Cli::run(int argc, char * argv[]) {
 
     Log(LogSwitch::Szx::Input) << "load instance " << env.instPath << " (seed=" << env.randSeed << ")." << endl;
     Problem::Input input;
-    if (!Problem::loadInput(env.instPath, input)) { return -1; }
+    if (!input.load(env.instPath)) { return -1; }
 
     Solver solver(input, env, cfg);
     solver.solve();
-    solver.output.save(env.slnPath);
+
+    pb::Submission submission;
+    submission.set_thread(to_string(env.jobNum));
+    submission.set_instance(env.friendlyInstName());
+    submission.set_duration(to_string(solver.timer.elapsedSeconds()) + "s");
+
+    solver.output.save(env.slnPath, submission);
     #if SZX_DEBUG
-    solver.output.save(env.solutionPathWithTime());
+    solver.output.save(env.solutionPathWithTime(), submission);
     solver.record();
     #endif // SZX_DEBUG
 
@@ -254,8 +260,8 @@ bool Solver::check(Length &checkerObj) const {
 void Solver::init() {
     aux.isCompatible.resize(input.flights().size(), List<bool>(input.airport().gates().size(), true));
     ID f = 0;
-    for (auto flight = input.flights().begin(); flight < input.flights().end(); ++flight, ++f) {
-        for (auto ig = flight->incompatiblegates().begin(); ig < flight->incompatiblegates().end(); ++ig) {
+    for (auto flight = input.flights().begin(); flight != input.flights().end(); ++flight, ++f) {
+        for (auto ig = flight->incompatiblegates().begin(); ig != flight->incompatiblegates().end(); ++ig) {
             aux.isCompatible[f][*ig] = false;
         }
     }
@@ -286,8 +292,5 @@ bool Solver::optimize(Solution &sln, ID workerId) {
     return status;
 }
 #pragma endregion Solver
-
-#pragma region Solver::Solution
-#pragma endregion Solver::Solution
 
 }
