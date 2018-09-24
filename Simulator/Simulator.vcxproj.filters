@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Solver">
+      <UniqueIdentifier>{084c3d0d-7a84-4349-a0f4-529941cdde14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Solver\Header Files">
+      <UniqueIdentifier>{0e6a88d0-fe73-436f-b649-69fe0715169f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Solver\Utility">
+      <UniqueIdentifier>{aa2bb08e-83da-4c57-978f-6e4a3a3c0419}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Solver\Source Files">
+      <UniqueIdentifier>{34b26482-fa2e-4df9-92eb-46aad7400d93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Solver\Protocol">
+      <UniqueIdentifier>{cfb319b9-b506-4146-b7d4-26df65b98a13}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ThreadPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Simulator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Solver\Common.h">
+      <Filter>Solver\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Solver\Config.h">
+      <Filter>Solver\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Solver\LogSwitch.h">
+      <Filter>Solver\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Solver\Problem.h">
+      <Filter>Solver\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Solver\Solver.h">
+      <Filter>Solver\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Solver\Utility.h">
+      <Filter>Solver\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Solver\CsvReader.h">
+      <Filter>Solver\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Solver\Visualizer.h">
+      <Filter>Solver\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Solver\GateAssignment.pb.h">
+      <Filter>Solver\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Solver\PbReader.h">
+      <Filter>Solver\Protocol</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Simulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Solver\Utility.cpp">
+      <Filter>Solver\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Solver\CsvReader.cpp">
+      <Filter>Solver\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Solver\Solver.cpp">
+      <Filter>Solver\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Solver\GateAssignment.pb.cc">
+      <Filter>Solver\Protocol</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
