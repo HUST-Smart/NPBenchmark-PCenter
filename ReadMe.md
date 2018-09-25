@@ -49,7 +49,13 @@
 
 # 编译链接
 
-## Windows
+## 修改代码
+
+1. 在 `Solver.cpp` 中搜索 `TODO[0]`, 并在对应位置添加求解算法的代码.
+2. 在 `Problem.h` 中搜索 `TODO[0]`, 并在对应位置修改提交至测评系统的信息.
+
+
+## 编译链接
 
 1. 自己编译 protobuf 或者在群共享下载 `解压至Lib目录(protobuf3.6.1_vs2017_MT+MTd_x64).zip` 并解压至 `Lib` 目录.
 2. 运行 `Protocol/` 目录下的 `generate.bat` (未更改 `*.proto` 文件可跳过该步骤).

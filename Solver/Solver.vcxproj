@@ -179,7 +179,6 @@
     <ClInclude Include="Problem.h" />
     <ClInclude Include="Solver.h" />
     <ClInclude Include="Utility.h" />
-    <ClInclude Include="Visualizer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CsvReader.cpp" />

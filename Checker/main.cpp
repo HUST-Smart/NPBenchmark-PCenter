@@ -3,11 +3,14 @@
 #include <sstream>
 #include <string>
 
+#include "Visualizer.h"
+
 #include "../Solver/PbReader.h"
 #include "../Solver/GateAssignment.pb.h"
 
 
 using namespace std;
+using namespace szx;
 using namespace pb;
 
 int main(int argc, char *argv[]) {
@@ -48,27 +51,55 @@ int main(int argc, char *argv[]) {
     oss << ifs.rdbuf();
     jsonToProtobuf(oss.str(), output);
 
+    // check solution.
+    int error = 0;
     int flightNumOnBridge = 0;
-
-    if (output.assignments().size() != input.flights().size()) { return ~CheckerFlag::FormatError; }
+    if (output.assignments().size() != input.flights().size()) { error |= CheckerFlag::FormatError; }
     int f = 0;
     for (auto gate = output.assignments().begin(); gate != output.assignments().end(); ++gate, ++f) {
         // check constraints.
-        if ((*gate < 0) || (*gate >= input.airport().gates().size())) { return ~CheckerFlag::FlightNotAssignedError; }
+        if ((*gate < 0) || (*gate >= input.airport().gates().size())) { error |= CheckerFlag::FlightNotAssignedError; }
         for (auto ig = input.flights(f).incompatiblegates().begin(); ig != input.flights(f).incompatiblegates().end(); ++ig) {
-            if (*gate == *ig) { return ~CheckerFlag::IncompatibleAssignmentError; }
+            if (*gate == *ig) { error |= CheckerFlag::IncompatibleAssignmentError; }
         }
         const auto &flight(input.flights(f));
         for (auto flight1 = input.flights().begin(); flight1 != input.flights().end(); ++flight1) {
             if (*gate != output.assignments(flight1->id())) { continue; }
             int gap = max(flight.turnaround().begin() - flight1->turnaround().end(),
                 flight1->turnaround().begin() - flight.turnaround().begin());
-            if (gap < input.airport().gates(*gate).mingap()) { return ~CheckerFlag::FlightOverlapError; }
+            if (gap < input.airport().gates(*gate).mingap()) { error |= CheckerFlag::FlightOverlapError; }
         }
 
         // check objective.
         if (*gate < input.airport().bridgenum()) { ++flightNumOnBridge; }
     }
 
-    return flightNumOnBridge;
+    // visualize solution.
+    double pixelPerMinute = 1;
+    double pixelPerGate = 30;
+    int horizonLen = 0;
+    for (auto flight = input.flights().begin(); flight != input.flights().end(); ++flight) {
+        horizonLen = max(horizonLen, flight->turnaround().end());
+    }
+
+    auto pos = outputPath.find_last_of('/');
+    string outputName = (pos == string::npos) ? outputPath : outputPath.substr(pos + 1);
+    Drawer draw;
+    draw.begin("Visualization/" + outputName + ".html", horizonLen * pixelPerMinute, input.airport().gates().size() * pixelPerGate, 1, 0);
+    f = 0;
+    for (auto gate = output.assignments().begin(); gate != output.assignments().end(); ++gate, ++f) {
+        // check constraints.
+        if ((*gate < 0) || (*gate >= input.airport().gates().size())) { continue; }
+        bool incompat = false;
+        for (auto ig = input.flights(f).incompatiblegates().begin(); ig != input.flights(f).incompatiblegates().end(); ++ig) {
+            if (*gate == *ig) { incompat = true; break; }
+        }
+        const auto &flight(input.flights(f));
+        draw.rect(flight.turnaround().begin() * pixelPerMinute, *gate * pixelPerGate, 
+            (flight.turnaround().end() - flight.turnaround().begin()) * pixelPerMinute, pixelPerGate,
+            false, to_string(f), "000000", incompat ? "00c00080" : "4080ff80");
+    }
+    draw.end();
+
+    return (error == 0) ? flightNumOnBridge : ~error;
 }

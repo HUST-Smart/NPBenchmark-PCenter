@@ -57,9 +57,6 @@
     <ClInclude Include="..\Solver\CsvReader.h">
       <Filter>Solver\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\Solver\Visualizer.h">
-      <Filter>Solver\Utility</Filter>
-    </ClInclude>
     <ClInclude Include="..\Solver\GateAssignment.pb.h">
       <Filter>Solver\Protocol</Filter>
     </ClInclude>

@@ -25,6 +25,7 @@
   <ItemGroup>
     <ClInclude Include="..\Solver\GateAssignment.pb.h" />
     <ClInclude Include="..\Solver\PbReader.h" />
+    <ClInclude Include="Visualizer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{03FDAE50-62C6-463A-8235-764094E593E7}</ProjectGuid>

@@ -179,7 +179,6 @@
     <ClInclude Include="..\Solver\Problem.h" />
     <ClInclude Include="..\Solver\Solver.h" />
     <ClInclude Include="..\Solver\Utility.h" />
-    <ClInclude Include="..\Solver\Visualizer.h" />
     <ClInclude Include="Simulator.h" />
     <ClInclude Include="ThreadPool.h" />
   </ItemGroup>

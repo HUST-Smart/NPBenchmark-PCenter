@@ -99,7 +99,7 @@ void Simulator::run(const String &envPath) {
 void Simulator::debug() {
     Task task;
     task.instSet = "";
-    task.instId = "rand.g4b8f8h480";
+    task.instId = "rand.g4b2f8h480";
     task.randSeed = "1500972793";
     //task.randSeed = to_string(RandSeed::generate());
     task.timeout = "180";
@@ -126,7 +126,7 @@ void Simulator::benchmark(int repeat) {
     random_device rd;
     mt19937 rgen(rd());
     // EXTEND[szx][5]: read it from InstanceList.txt.
-    vector<String> instList({ "rand.g4b2f8h480", "rand.g85b27f234h1440" });
+    vector<String> instList({ "rand.g4b2f8h480", "rand.g80b25f200h1440" });
     for (int i = 0; i < repeat; ++i) {
         //shuffle(instList.begin(), instList.end(), rgen);
         for (auto inst = instList.begin(); inst != instList.end(); ++inst) {
@@ -154,7 +154,7 @@ void Simulator::parallelBenchmark(int repeat) {
     random_device rd;
     mt19937 rgen(rd());
     // EXTEND[szx][5]: read it from InstanceList.txt.
-    vector<String> instList({ "rand.g4b2f8h480", "rand.g85b27f234h1440" });
+    vector<String> instList({ "rand.g4b2f8h480", "rand.g80b25f200h1440" });
     for (int i = 0; i < repeat; ++i) {
         //shuffle(instList.begin(), instList.end(), rgen);
         for (auto inst = instList.begin(); inst != instList.end(); ++inst) {
@@ -185,6 +185,9 @@ void Simulator::generateInstance(const InstanceTrait &trait) {
         flight.set_id(f);
 
         int turnaroudLen = rand.pick(trait.turnaroundLen.begin, trait.turnaroundLen.end);
+        if (turnaroudLen > 3 * 60) { // reduce long turnaround.
+            turnaroudLen = rand.pick(trait.turnaroundLen.begin, trait.turnaroundLen.end);
+        }
         int turnaroundBegin = rand.pick(0, trait.horizonLen - turnaroudLen);
         flight.mutable_turnaround()->set_begin(turnaroundBegin);
         flight.mutable_turnaround()->set_end(turnaroundBegin + turnaroudLen);

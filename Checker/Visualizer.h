@@ -1,5 +1,5 @@
 ////////////////////////////////
-/// usage : 1.	
+/// usage : 1.	generate html with svg graph.
 /// 
 /// note  : 1.	
 ////////////////////////////////
@@ -13,7 +13,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "Utility.h"
+#include <cstdlib>
 
 
 namespace szx {
@@ -25,7 +25,7 @@ struct RandColor {
 
     void next() {
         for (int i = 0; i < ColorCodeLen; ++i) {
-            int c = r.pick(ColorCodeBase);
+            int c = rand() % ColorCodeBase;
             bcolor[i] = ColorCodeChar[c];
             fcolor[i] = ColorCodeChar[(c >(ColorCodeBase / 2)) ? 0 : (ColorCodeBase - 1)]; // (c + ColorCodeBase / 2) % ColorCodeBase
         }
@@ -33,7 +33,6 @@ struct RandColor {
 
     char fcolor[ColorCodeLen + 1] = { 0 }; // front color.
     char bcolor[ColorCodeLen + 1] = { 0 }; // background color.
-    Random r;
 };
 
 struct Drawer {
@@ -46,14 +45,14 @@ struct Drawer {
         double h;
     };
     struct Item {
-        Item(double coordX, double coordY, double width, double height, bool direction, ID itemId) : x(coordX), y(coordY), w(width), h(height), d(direction), i(itemId) {}
+        Item(double coordX, double coordY, double width, double height, bool direction, int itemId) : x(coordX), y(coordY), w(width), h(height), d(direction), i(itemId) {}
 
         double x;
         double y;
         double w;
         double h;
         bool d;
-        ID i;
+        int i;
     };
     struct Cut {
         Cut(double coordX0, double coordY0, double coordX1, double coordY1, int layer) : x0(coordX0), y0(coordY0), x1(coordX1), y1(coordY1), l(layer) {}
@@ -67,9 +66,9 @@ struct Drawer {
 
 
     static constexpr double Scale = 1; // set to 0.2 to get 100% zoom on modern screen.
-    static constexpr double CanvasWidth = 6000 * Scale;
-    static constexpr double CanvasHeight = 3210 * Scale;
-    static constexpr int FontSize = static_cast<int>(60 * Scale);
+    static constexpr double CanvasWidth = 1680 * Scale;
+    static constexpr double CanvasHeight = 960 * Scale;
+    static constexpr int FontSize = static_cast<int>(12 * Scale);
 
 
     void begin(std::string path, double plateWidth, double plateHeight, double plateNum, double plateGap) {

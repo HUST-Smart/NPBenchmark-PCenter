@@ -32,5 +32,8 @@
     <ClInclude Include="..\Solver\PbReader.h">
       <Filter>Protocol</Filter>
     </ClInclude>
+    <ClInclude Include="Visualizer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -10,8 +10,6 @@
 
 #include <cmath>
 
-#include "Visualizer.h"
-
 
 using namespace std;
 
@@ -166,7 +164,7 @@ bool Solver::solve() {
     List<thread> threadList;
     threadList.reserve(workerNum);
     for (int i = 0; i < workerNum; ++i) {
-        // TODO[szx][0]: as *this is captured by ref, the solver should support concurrency itself, i.e., data members should be read-only or independent for each worker.
+        // TODO[szx][2]: as *this is captured by ref, the solver should support concurrency itself, i.e., data members should be read-only or independent for each worker.
         // OPTIMIZE[szx][3]: add a list to specify a series of algorithm to be used by each threads in sequence.
         threadList.emplace_back([&, i]() { success[i] = optimize(solutions[i], i); });
     }
@@ -242,7 +240,7 @@ bool Solver::check(Length &checkerObj) const {
         FlightOverlapError = 0x8
     };
 
-    checkerObj = System::exec("Checker.exe " + env.instPath + " " + env.slnPath);
+    checkerObj = System::exec("Checker.exe " + env.instPath + " " + env.solutionPathWithTime());
     if (checkerObj > 0) { return true; }
     checkerObj = ~checkerObj;
     if (checkerObj == CheckerFlag::IoError) { Log(LogSwitch::Checker) << "IoError." << endl; }
@@ -281,7 +279,7 @@ bool Solver::optimize(Solution &sln, ID workerId) {
     sln.flightNumOnBridge = 0;
 
 
-    // TODO[szx][0]: replace the following random assignment with your own algorithm.
+    // TODO[0]: replace the following random assignment with your own algorithm.
     for (ID f = 0; !timer.isTimeOut() && (f < flightNum); ++f) {
         assignments[f] = rand.pick(gateNum);
         if (assignments[f] < bridgeNum) { ++sln.flightNumOnBridge; } // record obj.
