@@ -172,13 +172,13 @@ bool Solver::solve() {
 
     Log(LogSwitch::Szx::Framework) << "collect best result among all workers." << endl;
     int bestIndex = -1;
-    Length bestWidth = 0;
+    Length bestValue = 0;
     for (int i = 0; i < workerNum; ++i) {
         if (!success[i]) { continue; }
         Log(LogSwitch::Szx::Framework) << "worker " << i << " got " << solutions[i].flightNumOnBridge << endl;
-        if (solutions[i].flightNumOnBridge <= bestWidth) { continue; }
+        if (solutions[i].flightNumOnBridge <= bestValue) { continue; }
         bestIndex = i;
-        bestWidth = solutions[i].flightNumOnBridge;
+        bestValue = solutions[i].flightNumOnBridge;
     }
 
     env.rid = to_string(bestIndex);
