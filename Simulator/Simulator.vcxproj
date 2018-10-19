@@ -22,7 +22,6 @@
     <ProjectGuid>{6F05DAC1-4FEF-4D11-B177-4FB26A217AE8}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Simulator</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

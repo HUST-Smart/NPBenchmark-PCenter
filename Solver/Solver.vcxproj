@@ -22,7 +22,6 @@
     <ProjectGuid>{56943A84-2134-44AE-81B9-990E01250A48}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Solver</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
