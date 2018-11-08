@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
 
     if (output.centers().size() <= 0) { return ~CheckerFlag::FormatError; }
     vector<bool> isCenter(nodeNum, false);
-    for (int c = 0; c < output.centers().size(); ++c) { isCenter[c] = true; }
+    for (auto c = output.centers().begin(); c != output.centers().end(); ++c) { isCenter[*c] = true; }
 
     // OPTIMIZE[szx][0]: use floyd on dense graph.
     // OPTIMIZE[szx][0]: skip shortest path finding on geometric graph.
