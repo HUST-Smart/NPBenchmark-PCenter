@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <chrono>
 
 #include "Visualizer.h"
 
@@ -17,7 +18,8 @@ using namespace pb;
 int main(int argc, char *argv[]) {
     enum CheckerFlag {
         IoError = 0x0,
-        TooManyCentersError = 0x1
+        FormatError = 0x1,
+        TooManyCentersError = 0x2
     };
 
     string inputPath;
@@ -52,6 +54,7 @@ int main(int argc, char *argv[]) {
     int nodeNum = input.graph().nodenum();
     int maxWeight = 0;
 
+    if (output.centers().size() <= 0) { return ~CheckerFlag::FormatError; }
     vector<bool> isCenter(nodeNum, false);
     for (int c = 0; c < output.centers().size(); ++c) { isCenter[c] = true; }
 
@@ -71,12 +74,16 @@ int main(int argc, char *argv[]) {
     if (output.centers().size() > input.centernum()) { error |= CheckerFlag::TooManyCentersError; }
     // check objective.
     int coverRadius = 0;
+    chrono::steady_clock::time_point start = chrono::steady_clock::now();
     Dij dij(adjList, 0, maxWeight);
+    cerr << "dijkstra init takes " << (chrono::duration_cast<chrono::milliseconds>(chrono::steady_clock::now() - start).count() / 1000.0) << " seconds" << endl;
     for (int n = 0; n < nodeNum; ++n) {
+        if (isCenter[n]) { continue; }
         dij.reset(n);
         int closestCenter = dij.next([&](int node) { return isCenter[node]; });
         if (coverRadius < dij.getDist(closestCenter)) { coverRadius = dij.getDist(closestCenter); }
     }
+    cerr << "dijkstra takes " << (chrono::duration_cast<chrono::milliseconds>(chrono::steady_clock::now() - start).count() / 1000.0) << " seconds" << endl;
 
     int returnCode = (error == 0) ? coverRadius : ~error;
     cout << returnCode << endl;

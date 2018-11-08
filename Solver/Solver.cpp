@@ -172,11 +172,11 @@ bool Solver::solve() {
 
     Log(LogSwitch::Szx::Framework) << "collect best result among all workers." << endl;
     int bestIndex = -1;
-    Length bestValue = 0;
+    Length bestValue = Problem::MaxDistance;
     for (int i = 0; i < workerNum; ++i) {
         if (!success[i]) { continue; }
         Log(LogSwitch::Szx::Framework) << "worker " << i << " got " << solutions[i].coverRadius << endl;
-        if (solutions[i].coverRadius <= bestValue) { continue; }
+        if (solutions[i].coverRadius >= bestValue) { continue; }
         bestIndex = i;
         bestValue = solutions[i].coverRadius;
     }
@@ -234,9 +234,7 @@ bool Solver::check(Length &checkerObj) const {
     enum CheckerFlag {
         IoError = 0x0,
         FormatError = 0x1,
-        FlightNotAssignedError = 0x2,
-        IncompatibleAssignmentError = 0x4,
-        FlightOverlapError = 0x8
+        TooManyCentersError = 0x2
     };
 
     checkerObj = System::exec("Checker.exe " + env.instPath + " " + env.solutionPathWithTime());
@@ -244,9 +242,7 @@ bool Solver::check(Length &checkerObj) const {
     checkerObj = ~checkerObj;
     if (checkerObj == CheckerFlag::IoError) { Log(LogSwitch::Checker) << "IoError." << endl; }
     if (checkerObj & CheckerFlag::FormatError) { Log(LogSwitch::Checker) << "FormatError." << endl; }
-    if (checkerObj & CheckerFlag::FlightNotAssignedError) { Log(LogSwitch::Checker) << "FlightNotAssignedError." << endl; }
-    if (checkerObj & CheckerFlag::IncompatibleAssignmentError) { Log(LogSwitch::Checker) << "IncompatibleAssignmentError." << endl; }
-    if (checkerObj & CheckerFlag::FlightOverlapError) { Log(LogSwitch::Checker) << "FlightOverlapError." << endl; }
+    if (checkerObj & CheckerFlag::TooManyCentersError) { Log(LogSwitch::Checker) << "TooManyCentersError." << endl; }
     return false;
     #else
     checkerObj = 0;
