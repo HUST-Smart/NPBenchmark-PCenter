@@ -261,7 +261,10 @@ void Solver::init() {
     }
 
     Timer timer(30s);
-    Floyd::findAllPairsPaths_opt(aux.adjMat);
+    constexpr bool IsUndirectedGraph = true;
+    IsUndirectedGraph
+        ? Floyd::findAllPairsPaths_symmetric(aux.adjMat)
+        : Floyd::findAllPairsPaths_asymmetric(aux.adjMat);
     Log(LogSwitch::Preprocess) << "Floyd takes " << timer.elapsedSeconds() << " seconds." << endl;
 
     aux.coverRadii.init(input.graph().nodenum());
