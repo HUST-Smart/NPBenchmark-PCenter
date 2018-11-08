@@ -57,10 +57,10 @@
     <ClInclude Include="..\Solver\CsvReader.h">
       <Filter>Solver\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\Solver\GateAssignment.pb.h">
+    <ClInclude Include="..\Solver\PbReader.h">
       <Filter>Solver\Protocol</Filter>
     </ClInclude>
-    <ClInclude Include="..\Solver\PbReader.h">
+    <ClInclude Include="..\Solver\PCenter.pb.h">
       <Filter>Solver\Protocol</Filter>
     </ClInclude>
   </ItemGroup>
@@ -80,7 +80,7 @@
     <ClCompile Include="..\Solver\Solver.cpp">
       <Filter>Solver\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Solver\GateAssignment.pb.cc">
+    <ClCompile Include="..\Solver\PCenter.pb.cc">
       <Filter>Solver\Protocol</Filter>
     </ClCompile>
   </ItemGroup>

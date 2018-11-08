@@ -99,7 +99,7 @@ void Simulator::run(const String &envPath) {
 void Simulator::debug() {
     Task task;
     task.instSet = "";
-    task.instId = "rand.g4b2f8h480";
+    task.instId = "pmed1.n100e198p5";
     task.randSeed = "1500972793";
     //task.randSeed = to_string(RandSeed::generate());
     task.timeout = "180";
@@ -126,7 +126,48 @@ void Simulator::benchmark(int repeat) {
     random_device rd;
     mt19937 rgen(rd());
     // EXTEND[szx][5]: read it from InstanceList.txt.
-    vector<String> instList({ "rand.g4b2f8h480", "rand.g80b25f200h1440" });
+    vector<String> instList({
+        "pmed1.n100e198p5",
+        "pmed2.n100e193p10",
+        "pmed3.n100e198p10",
+        "pmed4.n100e196p20",
+        "pmed5.n100e196p33",
+        "pmed6.n200e786p5",
+        "pmed7.n200e779p10",
+        "pmed8.n200e792p20",
+        "pmed9.n200e785p40",
+        "pmed10.n200e786p67",
+        "pmed11.n300e1772p5",
+        "pmed12.n300e1758p10",
+        "pmed13.n300e1760p30",
+        "pmed14.n300e1771p60",
+        "pmed15.n300e1754p100",
+        "pmed16.n400e3153p5",
+        "pmed17.n400e3142p10",
+        "pmed18.n400e3134p40",
+        "pmed19.n400e3134p80",
+        "pmed20.n400e3144p133",
+        "pmed21.n500e4909p5",
+        "pmed22.n500e4896p10",
+        "pmed23.n500e4903p50",
+        "pmed24.n500e4914p100",
+        "pmed25.n500e4894p167",
+        "pmed26.n600e7069p5",
+        "pmed27.n600e7072p10",
+        "pmed28.n600e7054p60",
+        "pmed29.n600e7042p120",
+        "pmed30.n600e7042p200",
+        "pmed31.n700e9601p5",
+        "pmed32.n700e9584p10",
+        "pmed33.n700e9616p70",
+        "pmed34.n700e9585p140",
+        "pmed35.n800e12548p5",
+        "pmed36.n800e12560p10",
+        "pmed37.n800e12564p80",
+        "pmed38.n900e15898p5",
+        "pmed39.n900e15896p10",
+        "pmed40.n900e15879p90"
+    });
     for (int i = 0; i < repeat; ++i) {
         //shuffle(instList.begin(), instList.end(), rgen);
         for (auto inst = instList.begin(); inst != instList.end(); ++inst) {
@@ -154,7 +195,48 @@ void Simulator::parallelBenchmark(int repeat) {
     random_device rd;
     mt19937 rgen(rd());
     // EXTEND[szx][5]: read it from InstanceList.txt.
-    vector<String> instList({ "rand.g4b2f8h480", "rand.g80b25f200h1440" });
+    vector<String> instList({
+        "pmed1.n100e198p5",
+        "pmed2.n100e193p10",
+        "pmed3.n100e198p10",
+        "pmed4.n100e196p20",
+        "pmed5.n100e196p33",
+        "pmed6.n200e786p5",
+        "pmed7.n200e779p10",
+        "pmed8.n200e792p20",
+        "pmed9.n200e785p40",
+        "pmed10.n200e786p67",
+        "pmed11.n300e1772p5",
+        "pmed12.n300e1758p10",
+        "pmed13.n300e1760p30",
+        "pmed14.n300e1771p60",
+        "pmed15.n300e1754p100",
+        "pmed16.n400e3153p5",
+        "pmed17.n400e3142p10",
+        "pmed18.n400e3134p40",
+        "pmed19.n400e3134p80",
+        "pmed20.n400e3144p133",
+        "pmed21.n500e4909p5",
+        "pmed22.n500e4896p10",
+        "pmed23.n500e4903p50",
+        "pmed24.n500e4914p100",
+        "pmed25.n500e4894p167",
+        "pmed26.n600e7069p5",
+        "pmed27.n600e7072p10",
+        "pmed28.n600e7054p60",
+        "pmed29.n600e7042p120",
+        "pmed30.n600e7042p200",
+        "pmed31.n700e9601p5",
+        "pmed32.n700e9584p10",
+        "pmed33.n700e9616p70",
+        "pmed34.n700e9585p140",
+        "pmed35.n800e12548p5",
+        "pmed36.n800e12560p10",
+        "pmed37.n800e12564p80",
+        "pmed38.n900e15898p5",
+        "pmed39.n900e15896p10",
+        "pmed40.n900e15879p90"
+    });
     for (int i = 0; i < repeat; ++i) {
         //shuffle(instList.begin(), instList.end(), rgen);
         for (auto inst = instList.begin(); inst != instList.end(); ++inst) {
@@ -170,42 +252,54 @@ void Simulator::parallelBenchmark(int repeat) {
 void Simulator::generateInstance(const InstanceTrait &trait) {
     Random rand;
 
-    int gateNum = rand.pick(trait.gateNum.begin, trait.gateNum.end);
-    int flightNum = rand.pick(trait.flightNum.begin, trait.flightNum.end);
+    Problem::Input input;
+
+    // EXTEND[szx][5]: generate random instances.
+
+    ostringstream path;
+    path << InstanceDir() << "rand.n" << input.graph().nodenum()
+        << "p" << input.centernum() << ".json";
+    save(path.str(), input);
+}
+
+void Simulator::convertPmedInstance(const String &pmedPath, int index) {
+    Log(Log::Info) << "converting pmed" << index << endl;
+
+    ifstream ifs(pmedPath);
+
+    int nodeNum, edgeNum, centerNum;
+    ifs >> nodeNum >> edgeNum >> centerNum;
+
+    Arr2D<int> edgeIndices(nodeNum, nodeNum, -1);
 
     Problem::Input input;
-    input.mutable_airport()->set_bridgenum(rand.pick(trait.bridgeNum.begin, trait.bridgeNum.end));
-    for (int g = 0; g < gateNum; ++g) {
-        auto &gate(*input.mutable_airport()->add_gates());
-        gate.set_id(g);
-        gate.set_mingap(30);
-    }
-    for (auto f = 0; f < flightNum; ++f) {
-        auto &flight(*input.add_flights());
-        flight.set_id(f);
+    input.set_centernum(centerNum);
 
-        int turnaroudLen = rand.pick(trait.turnaroundLen.begin, trait.turnaroundLen.end);
-        if (turnaroudLen > 3 * 60) { // reduce long turnaround.
-            turnaroudLen = rand.pick(trait.turnaroundLen.begin, trait.turnaroundLen.end);
-        }
-        int turnaroundBegin = rand.pick(0, trait.horizonLen - turnaroudLen);
-        flight.mutable_turnaround()->set_begin(turnaroundBegin);
-        flight.mutable_turnaround()->set_end(turnaroundBegin + turnaroudLen);
+    auto &graph(*input.mutable_graph());
+    graph.set_nodenum(nodeNum);
+    for (int e = 0; e < edgeNum; ++e) {
+        int source, target, length;
+        ifs >> source >> target >> length;
+        --source;
+        --target;
 
-        int incompatibleGateNum = rand.pick(trait.incompatibleGateNumPerFlight.begin, trait.incompatibleGateNumPerFlight.end);
-        Sampling sample(rand, incompatibleGateNum);
-        List<int> pickedGates(incompatibleGateNum + 1);
-        for (auto g = 0; g < gateNum; ++g) { pickedGates[sample.isPicked()] = g; }
-        for (auto ig = 1; ig <= incompatibleGateNum; ++ig) {
-            flight.add_incompatiblegates(pickedGates[ig]);
+        if (source > target) { swap(source, target); }
+
+        if (edgeIndices.at(source, target) < 0) {
+            edgeIndices.at(source, target) = graph.edges().size();
+            auto &edge(*graph.add_edges());
+            edge.set_source(source);
+            edge.set_target(target);
+            edge.set_length(length);
+        } else {
+            Log(Log::Warning) << "duplicated edge " << source << "-" << target << ", overwrite length " << graph.edges(edgeIndices.at(source, target)).length() << "->" << length << endl;
+            graph.mutable_edges(edgeIndices.at(source, target))->set_length(length);
         }
     }
 
     ostringstream path;
-    path << InstanceDir() << "rand.g" << input.airport().gates().size()
-        << "b" << input.airport().bridgenum()
-        << "f" << input.flights().size()
-        << "h" << trait.horizonLen << ".json";
+    path << InstanceDir() << "pmed" << index << ".n" << input.graph().nodenum()
+        << "e" << input.graph().edges().size() << "p" << input.centernum() << ".json";
     save(path.str(), input);
 }
 

@@ -5,8 +5,8 @@
 /// note  : 1.	tag macros with [on/off] to indicate prefered state.
 ////////////////////////////////
 
-#ifndef SMART_SZX_GATE_ASSIGNMENT_CONFIG_H
-#define SMART_SZX_GATE_ASSIGNMENT_CONFIG_H
+#ifndef SMART_SZX_P_CENTER_CONFIG_H
+#define SMART_SZX_P_CENTER_CONFIG_H
 
 
 #pragma region PlatformCheck
@@ -102,4 +102,4 @@
 #pragma endregion SolverBehavior
 
 
-#endif // SMART_SZX_GATE_ASSIGNMENT_CONFIG_H
+#endif // SMART_SZX_P_CENTER_CONFIG_H

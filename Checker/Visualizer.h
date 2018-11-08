@@ -4,8 +4,8 @@
 /// note  : 1.	
 ////////////////////////////////
 
-#ifndef SMART_SZX_GATE_ASSIGNMENT_VISUALIZER_H
-#define SMART_SZX_GATE_ASSIGNMENT_VISUALIZER_H
+#ifndef SMART_SZX_P_CENTER_VISUALIZER_H
+#define SMART_SZX_P_CENTER_VISUALIZER_H
 
 
 #include <algorithm>
@@ -130,4 +130,4 @@ struct Drawer {
 }
 
 
-#endif // SMART_SZX_GATE_ASSIGNMENT_VISUALIZER_H
+#endif // SMART_SZX_P_CENTER_VISUALIZER_H

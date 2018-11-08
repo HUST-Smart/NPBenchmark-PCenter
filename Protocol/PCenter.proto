@@ -1,0 +1,62 @@
+// # 概述
+// 使用 Google 的 Protocol Buffer (简称 protobuf) 定义.
+// 中心选址问题原始输入输出数据格式.
+// PCenter 定义了算法所需的全部数据.
+// PCenter.Input 定义了算法所需的全部输入数据.
+// PCenter.Output 定义了算法所需的全部输出数据, 应输出至提交文件的第二行以后.
+// PCenter.Submission 定义了向测评系统提交的计算结果文件的信息摘要, 应输出至提交文件的第一行.
+
+
+syntax = "proto3";
+
+package pb;
+
+option java_package = "pb";
+option java_outer_classname = "GateAssignments";
+// option cc_enable_arenas = true;
+
+
+// 主要数据.
+message PCenter {
+  message Input { // 输入.
+    UndirectGraph graph = 1; // 无向图.
+    int32 centerNum = 2; // 服务节点数目.
+  }
+	
+  message Output { // 输出.
+    repeated int32 centers = 1; // 服务节点列表.
+  }
+
+  message UndirectGraph { // 无向图信息. 节点从 0 开始连续编号.
+    repeated Edge edges = 1; // 边列表.
+    int32 nodeNum = 2; // 节点数.
+  }
+
+  message Edge { // 边信息.
+    int32 source = 1; // 边的源节点编号.
+    int32 target = 2; // 边的宿节点编号.
+    int32 length = 3; // 边的长度.
+  }
+}
+
+message Submission { // 测评系统提交信息摘要.
+  // 应在 SDK 内由提交者手工填写的数据项.
+  string author = 1; // 提交者姓名.
+  string algorithm = 2; // 算法名称.
+  string thread = 3; // 算法线程数
+  string cpu = 4; // 处理器型号与主频.
+  string ram = 5; // 内存容量与频率. (Windows 下可以使用 wmic memorychip 命令查看)
+  string language = 6; // 编程语言.
+  string compiler = 7; // 编译器.
+  string os = 8; // 操作系统
+
+  // 由 SDK 自动记录的数据项.
+  string problem = 21; // 问题名称.
+  string instance = 22; // 算例名称.
+  string duration = 23; // 求解耗时.
+
+  // 由服务器自动计算的数据项.
+  double obj = 31; // 计算结果目标函数值.
+  string email = 32; // 提交者邮箱.
+  string date = 33; // 提交时间.
+}

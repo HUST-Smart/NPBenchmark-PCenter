@@ -5,8 +5,9 @@
 
 #include "Visualizer.h"
 
+#include "ShortestPath.h"
 #include "../Solver/PbReader.h"
-#include "../Solver/GateAssignment.pb.h"
+#include "../Solver/PCenter.pb.h"
 
 
 using namespace std;
@@ -16,10 +17,7 @@ using namespace pb;
 int main(int argc, char *argv[]) {
     enum CheckerFlag {
         IoError = 0x0,
-        FormatError = 0x1,
-        FlightNotAssignedError = 0x2,
-        IncompatibleAssignmentError = 0x4,
-        FlightOverlapError = 0x8
+        TooManyCentersError = 0x1
     };
 
     string inputPath;
@@ -39,10 +37,10 @@ int main(int argc, char *argv[]) {
         cin >> outputPath;
     }
 
-    pb::GateAssignment::Input input;
+    pb::PCenter::Input input;
     if (!load(inputPath, input)) { return ~CheckerFlag::IoError; }
 
-    pb::GateAssignment::Output output;
+    pb::PCenter::Output output;
     ifstream ifs(outputPath);
     if (!ifs.is_open()) { return ~CheckerFlag::IoError; }
     string submission;
@@ -51,57 +49,36 @@ int main(int argc, char *argv[]) {
     oss << ifs.rdbuf();
     jsonToProtobuf(oss.str(), output);
 
+    int nodeNum = input.graph().nodenum();
+    int maxWeight = 0;
+
+    vector<bool> isCenter(nodeNum, false);
+    for (int c = 0; c < output.centers().size(); ++c) { isCenter[c] = true; }
+
+    // OPTIMIZE[szx][0]: use floyd on dense graph.
+    // OPTIMIZE[szx][0]: skip shortest path finding on geometric graph.
+    using Dij = Dijkstra<int, int>;
+    Dij::AdjList adjList(nodeNum);
+    for (auto e = input.graph().edges().begin(); e != input.graph().edges().end(); ++e) {
+        adjList[e->source()].push_back(Dij::AdjNode(e->target(), e->length()));
+        adjList[e->target()].push_back(Dij::AdjNode(e->source(), e->length()));
+        maxWeight += e->length();
+    }
+
     // check solution.
     int error = 0;
-    int flightNumOnBridge = 0;
-    if (output.assignments().size() != input.flights().size()) { error |= CheckerFlag::FormatError; }
-    int f = 0;
-    for (auto gate = output.assignments().begin(); gate != output.assignments().end(); ++gate, ++f) {
-        // check constraints.
-        if ((*gate < 0) || (*gate >= input.airport().gates().size())) { error |= CheckerFlag::FlightNotAssignedError; }
-        for (auto ig = input.flights(f).incompatiblegates().begin(); ig != input.flights(f).incompatiblegates().end(); ++ig) {
-            if (*gate == *ig) { error |= CheckerFlag::IncompatibleAssignmentError; }
-        }
-        const auto &flight(input.flights(f));
-        for (auto flight1 = input.flights().begin(); flight1 != input.flights().end(); ++flight1) {
-            if (*gate != output.assignments(flight1->id())) { continue; }
-            int gap = max(flight.turnaround().begin() - flight1->turnaround().end(),
-                flight1->turnaround().begin() - flight.turnaround().begin());
-            if (gap < input.airport().gates(*gate).mingap()) { error |= CheckerFlag::FlightOverlapError; }
-        }
-
-        // check objective.
-        if (*gate < input.airport().bridgenum()) { ++flightNumOnBridge; }
+    // check constraints.
+    if (output.centers().size() > input.centernum()) { error |= CheckerFlag::TooManyCentersError; }
+    // check objective.
+    int coverRadius = 0;
+    Dij dij(adjList, 0, maxWeight);
+    for (int n = 0; n < nodeNum; ++n) {
+        dij.reset(n);
+        int closestCenter = dij.next([&](int node) { return isCenter[node]; });
+        if (coverRadius < dij.getDist(closestCenter)) { coverRadius = dij.getDist(closestCenter); }
     }
 
-    // visualize solution.
-    double pixelPerMinute = 1;
-    double pixelPerGate = 30;
-    int horizonLen = 0;
-    for (auto flight = input.flights().begin(); flight != input.flights().end(); ++flight) {
-        horizonLen = max(horizonLen, flight->turnaround().end());
-    }
-
-    auto pos = outputPath.find_last_of('/');
-    string outputName = (pos == string::npos) ? outputPath : outputPath.substr(pos + 1);
-    Drawer draw;
-    draw.begin("Visualization/" + outputName + ".html", horizonLen * pixelPerMinute, input.airport().gates().size() * pixelPerGate, 1, 0);
-    f = 0;
-    for (auto gate = output.assignments().begin(); gate != output.assignments().end(); ++gate, ++f) {
-        // check constraints.
-        if ((*gate < 0) || (*gate >= input.airport().gates().size())) { continue; }
-        bool incompat = false;
-        for (auto ig = input.flights(f).incompatiblegates().begin(); ig != input.flights(f).incompatiblegates().end(); ++ig) {
-            if (*gate == *ig) { incompat = true; break; }
-        }
-        const auto &flight(input.flights(f));
-        draw.rect(flight.turnaround().begin() * pixelPerMinute, *gate * pixelPerGate, 
-            (flight.turnaround().end() - flight.turnaround().begin()) * pixelPerMinute, pixelPerGate,
-            false, to_string(f), "000000", incompat ? "00c00080" : "4080ff80");
-    }
-    draw.end();
-
-    int returnCode = (error == 0) ? flightNumOnBridge : ~error;
+    int returnCode = (error == 0) ? coverRadius : ~error;
     cout << returnCode << endl;
     return returnCode;
 }

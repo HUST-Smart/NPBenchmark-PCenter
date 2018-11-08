@@ -4,8 +4,8 @@
 /// note  : 1.	
 ////////////////////////////////
 
-#ifndef SMART_SZX_GATE_ASSIGNMENT_PROBLEM_H
-#define SMART_SZX_GATE_ASSIGNMENT_PROBLEM_H
+#ifndef SMART_SZX_P_CENTER_PROBLEM_H
+#define SMART_SZX_P_CENTER_PROBLEM_H
 
 
 #include "Config.h"
@@ -16,7 +16,7 @@
 
 #include "Common.h"
 #include "PbReader.h"
-#include "GateAssignment.pb.h"
+#include "PCenter.pb.h"
 
 
 namespace szx {
@@ -24,11 +24,11 @@ namespace szx {
 class Problem {
     #pragma region Type
 public:
-    struct Input : public pb::GateAssignment::Input {
+    struct Input : public pb::PCenter::Input {
         bool load(const String &path) { return pb::load(path, *this); }
     };
 
-    struct Output : public pb::GateAssignment::Output {
+    struct Output : public pb::PCenter::Output {
         bool save(const String &path, pb::Submission &submission) const {
             std::ofstream ofs(path);
             if (!ofs.is_open()) { return false; }
@@ -41,22 +41,22 @@ public:
             submission.set_language("C++");
             submission.set_compiler("VS2017");
             submission.set_os("Windows 10");
-            submission.set_problem("GateAssignment");
+            submission.set_problem("PCenter");
 
             ofs << protobufToJson(submission, false) << std::endl << protobufToJson(*this);
             return true;
         }
 
-        ID flightNumOnBridge = 0;
+        ID coverRadius = 0;
     };
     #pragma endregion Type
 
     #pragma region Constant
 public:
     enum {
-        MaxGateNum = 100,
-        MaxBridgeNum = 30,
-        MaxFlightNum = 400,
+        MaxDistance = (1 << 30),
+        MaxNodeNum = 5000,
+        MaxCenterNum = 5000,
 
         InvalidId = -1,
     };
@@ -78,4 +78,4 @@ public:
 }
 
 
-#endif // SMART_SZX_GATE_ASSIGNMENT_PROBLEM_H
+#endif // SMART_SZX_P_CENTER_PROBLEM_H

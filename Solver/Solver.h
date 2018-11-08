@@ -4,8 +4,8 @@
 /// note  : 1.	
 ////////////////////////////////
 
-#ifndef SMART_SZX_GATE_ASSIGNMENT_SOLVER_H
-#define SMART_SZX_GATE_ASSIGNMENT_SOLVER_H
+#ifndef SMART_SZX_P_CENTER_SOLVER_H
+#define SMART_SZX_P_CENTER_SOLVER_H
 
 
 #include "Config.h"
@@ -206,7 +206,8 @@ public:
     Problem::Output output;
 
     struct { // auxiliary data for solver.
-        List<List<bool>> isCompatible; // isCompatible[f][g] is true if flight f is compatible with gate g.
+        Arr2D<Length> adjMat; // adjMat[i][j] is the distance of the edge which goes from i to j.
+        Arr<Length> coverRadii; // coverRadii[n] is the length of its shortest serve arc.
     } aux;
 
     Environment env;
@@ -221,4 +222,4 @@ public:
 }
 
 
-#endif // SMART_SZX_GATE_ASSIGNMENT_SOLVER_H
+#endif // SMART_SZX_P_CENTER_SOLVER_H

@@ -1,2 +1,2 @@
-..\Lib\protobuf\bin\protoc.exe --cpp_out=..\Solver -I=..\Protocol GateAssignment.proto
+..\Lib\protobuf\bin\protoc.exe --cpp_out=..\Solver -I=..\Protocol PCenter.proto
 pause

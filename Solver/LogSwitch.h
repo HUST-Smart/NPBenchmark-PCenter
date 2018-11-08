@@ -4,8 +4,8 @@
 /// note  : 1.	
 ////////////////////////////////
 
-#ifndef SMART_SZX_GATE_ASSIGNMENT_LOG_SWITCH_H
-#define SMART_SZX_GATE_ASSIGNMENT_LOG_SWITCH_H
+#ifndef SMART_SZX_P_CENTER_LOG_SWITCH_H
+#define SMART_SZX_P_CENTER_LOG_SWITCH_H
 
 
 #include "Utility.h"
@@ -33,4 +33,4 @@ struct LogSwitch {
 }
 
 
-#endif // SMART_SZX_GATE_ASSIGNMENT_LOG_SWITCH_H
+#endif // SMART_SZX_P_CENTER_LOG_SWITCH_H

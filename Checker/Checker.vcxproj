@@ -19,12 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Solver\GateAssignment.pb.cc" />
+    <ClCompile Include="..\Solver\PCenter.pb.cc" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Solver\GateAssignment.pb.h" />
     <ClInclude Include="..\Solver\PbReader.h" />
+    <ClInclude Include="..\Solver\PCenter.pb.h" />
+    <ClInclude Include="PriorityQueue.h" />
+    <ClInclude Include="ShortestPath.h" />
     <ClInclude Include="Visualizer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

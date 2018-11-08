@@ -4,8 +4,8 @@
 /// note  : 1.	
 ////////////////////////////////
 
-#ifndef SMART_SZX_GATE_ASSIGNMENT_UTILITY_H
-#define SMART_SZX_GATE_ASSIGNMENT_UTILITY_H
+#ifndef SMART_SZX_P_CENTER_UTILITY_H
+#define SMART_SZX_P_CENTER_UTILITY_H
 
 
 #include "Config.h"
@@ -746,7 +746,42 @@ public:
     }
 };
 
+
+class Floyd {
+public:
+    // find shortest paths between each pair of nodes.
+    template<typename Weight = Length>
+    static void findAllPairsPaths(Arr2D<Weight> &adjMat) {
+        ID nodeNum = adjMat.size1();
+
+        for (ID mid = 0; mid < nodeNum; ++mid) {
+            for (ID src = 0; src < nodeNum; ++src) {
+                for (ID dst = 0; dst < nodeNum; ++dst) {
+                    Weight w = adjMat.at(src, mid) + adjMat.at(mid, dst);
+                    if (w < adjMat.at(src, dst)) { adjMat.at(src, dst) = w; }
+                }
+            }
+        }
+    }
+
+    template<typename Weight = Length>
+    static void findAllPairsPaths_opt(Arr2D<Weight> &adjMat) {
+        ID nodeNum = adjMat.size1();
+
+        for (ID mid = 0; mid < nodeNum; ++mid) {
+            auto midVec = adjMat[mid];
+            for (ID src = 0; src < nodeNum; ++src) {
+                auto srcVec = adjMat[src];
+                for (ID dst = 0; dst < nodeNum; ++dst) {
+                    Weight w = srcVec[mid] + midVec[dst];
+                    if (w < srcVec[dst]) { srcVec[dst] = w; }
+                }
+            }
+        }
+    }
+};
+
 }
 
 
-#endif // SMART_SZX_GATE_ASSIGNMENT_H
+#endif // SMART_SZX_P_CENTER_H
