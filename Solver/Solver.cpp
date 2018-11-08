@@ -222,7 +222,7 @@ void Solver::record() const {
     ofstream logFile(env.logPath, ios::app);
     logFile.seekp(0, ios::end);
     if (logFile.tellp() <= 0) {
-        logFile << "Time,ID,Instance,Feasible,ObjMatch,Width,Duration,PhysMem,VirtMem,RandSeed,Config,Generation,Iteration,Solution" << endl;
+        logFile << "Time,ID,Instance,Feasible,ObjMatch,Distance,Duration,PhysMem,VirtMem,RandSeed,Config,Generation,Iteration,Solution" << endl;
     }
     logFile << log.str();
     logFile.close();
@@ -261,7 +261,7 @@ void Solver::init() {
     }
 
     Timer timer(30s);
-    Floyd::findAllPairsPaths(aux.adjMat);
+    Floyd::findAllPairsPaths_opt(aux.adjMat);
     Log(LogSwitch::Preprocess) << "Floyd takes " << timer.elapsedSeconds() << " seconds." << endl;
 
     aux.coverRadii.init(input.graph().nodenum());

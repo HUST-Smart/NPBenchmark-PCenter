@@ -54,7 +54,7 @@ public:
     #pragma region Constant
 public:
     enum {
-        MaxDistance = (1 << 30),
+        MaxDistance = (1 << 24),
         MaxNodeNum = 5000,
         MaxCenterNum = 5000,
 
