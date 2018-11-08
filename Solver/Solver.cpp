@@ -253,6 +253,7 @@ bool Solver::check(Length &checkerObj) const {
 void Solver::init() {
     aux.adjMat.init(input.graph().nodenum(), input.graph().nodenum());
     fill(aux.adjMat.begin(), aux.adjMat.end(), Problem::MaxDistance);
+    for (ID n = 0; n < input.graph().nodenum(); ++n) { aux.adjMat.at(n, n) = 0; }
     for (auto e = input.graph().edges().begin(); e != input.graph().edges().end(); ++e) {
         // only record the last appearance of each edge.
         aux.adjMat.at(e->source(), e->target()) = e->length();
