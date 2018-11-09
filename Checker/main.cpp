@@ -64,6 +64,7 @@ int main(int argc, char *argv[]) {
     if (output.centers().size() > input.centernum()) { error |= CheckerFlag::TooManyCentersError; }
     // check objective.
     int coverRadius = 0;
+    double objScale = 1;
     if (input.graph().nodes().empty()) { // topological graph.
         int maxWeight = 0;
         using Dij = Dijkstra<int, int>; // OPTIMIZE[szx][0]: use floyd on dense graph.
@@ -88,12 +89,13 @@ int main(int argc, char *argv[]) {
         }
         cerr << "dijkstra takes " << (chrono::duration_cast<chrono::milliseconds>(chrono::steady_clock::now() - start).count() / 1000.0) << " seconds" << endl;
     } else { // geometrical graph.
+        objScale = GeometricalGraphObjScale;
         for (int n = 0; n < nodeNum; ++n) {
             double nx = input.graph().nodes(n).x();
             double ny = input.graph().nodes(n).y();
             int shortestDist = numeric_limits<int>::max();
             for (auto c = output.centers().begin(); c != output.centers().end(); ++c) { 
-                int dist = static_cast<int>(GeometricalGraphObjScale * hypot(
+                int dist = static_cast<int>(objScale * hypot(
                     nx - input.graph().nodes(*c).x(), ny - input.graph().nodes(*c).y()));
                 if (dist < shortestDist) { shortestDist = dist; }
             }
@@ -102,6 +104,6 @@ int main(int argc, char *argv[]) {
     }
 
     int returnCode = (error == 0) ? coverRadius : ~error;
-    cout << returnCode << endl;
+    cout << ((error == 0) ? (coverRadius / objScale) : returnCode) << endl;
     return returnCode;
 }
