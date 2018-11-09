@@ -81,6 +81,7 @@ public:
         generateInstance(trait);
     }
     void convertPmedInstance(const String &pmedPath, int index);
+    void convertTspInstance(const String &tspName, int centerNum);
     #pragma endregion Method
 
     #pragma region Field

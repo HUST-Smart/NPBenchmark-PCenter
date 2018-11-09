@@ -21,7 +21,8 @@
 
 namespace protobuf_PCenter_2eproto {
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_PCenter_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_PCenter_Edge;
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_PCenter_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_PCenter_UndirectGraph;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_PCenter_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_PCenter_Node;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_PCenter_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_PCenter_UndirectGraph;
 }  // namespace protobuf_PCenter_2eproto
 namespace pb {
 class PCenter_InputDefaultTypeInternal {
@@ -44,6 +45,11 @@ class PCenter_EdgeDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<PCenter_Edge>
       _instance;
 } _PCenter_Edge_default_instance_;
+class PCenter_NodeDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<PCenter_Node>
+      _instance;
+} _PCenter_Node_default_instance_;
 class PCenterDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<PCenter>
@@ -96,9 +102,10 @@ static void InitDefaultsPCenter_UndirectGraph() {
   ::pb::PCenter_UndirectGraph::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<1> scc_info_PCenter_UndirectGraph =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsPCenter_UndirectGraph}, {
-      &protobuf_PCenter_2eproto::scc_info_PCenter_Edge.base,}};
+::google::protobuf::internal::SCCInfo<2> scc_info_PCenter_UndirectGraph =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsPCenter_UndirectGraph}, {
+      &protobuf_PCenter_2eproto::scc_info_PCenter_Edge.base,
+      &protobuf_PCenter_2eproto::scc_info_PCenter_Node.base,}};
 
 static void InitDefaultsPCenter_Edge() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -113,6 +120,20 @@ static void InitDefaultsPCenter_Edge() {
 
 ::google::protobuf::internal::SCCInfo<0> scc_info_PCenter_Edge =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsPCenter_Edge}, {}};
+
+static void InitDefaultsPCenter_Node() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::pb::_PCenter_Node_default_instance_;
+    new (ptr) ::pb::PCenter_Node();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::pb::PCenter_Node::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_PCenter_Node =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsPCenter_Node}, {}};
 
 static void InitDefaultsPCenter() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -147,11 +168,12 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_PCenter_Output.base);
   ::google::protobuf::internal::InitSCC(&scc_info_PCenter_UndirectGraph.base);
   ::google::protobuf::internal::InitSCC(&scc_info_PCenter_Edge.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_PCenter_Node.base);
   ::google::protobuf::internal::InitSCC(&scc_info_PCenter.base);
   ::google::protobuf::internal::InitSCC(&scc_info_Submission.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[6];
+::google::protobuf::Metadata file_level_metadata[7];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
@@ -174,6 +196,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::PCenter_UndirectGraph, edges_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::PCenter_UndirectGraph, nodenum_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::PCenter_UndirectGraph, nodes_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::PCenter_Edge, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -182,6 +205,13 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::PCenter_Edge, source_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::PCenter_Edge, target_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::PCenter_Edge, length_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::PCenter_Node, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::PCenter_Node, x_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::PCenter_Node, y_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::PCenter, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -211,9 +241,10 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 0, -1, sizeof(::pb::PCenter_Input)},
   { 7, -1, sizeof(::pb::PCenter_Output)},
   { 13, -1, sizeof(::pb::PCenter_UndirectGraph)},
-  { 20, -1, sizeof(::pb::PCenter_Edge)},
-  { 28, -1, sizeof(::pb::PCenter)},
-  { 33, -1, sizeof(::pb::Submission)},
+  { 21, -1, sizeof(::pb::PCenter_Edge)},
+  { 29, -1, sizeof(::pb::PCenter_Node)},
+  { 36, -1, sizeof(::pb::PCenter)},
+  { 41, -1, sizeof(::pb::Submission)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -221,6 +252,7 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::pb::_PCenter_Output_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::pb::_PCenter_UndirectGraph_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::pb::_PCenter_Edge_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::pb::_PCenter_Node_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::pb::_PCenter_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::pb::_Submission_default_instance_),
 };
@@ -240,28 +272,30 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 6);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 7);
 }
 
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\rPCenter.proto\022\002pb\"\345\001\n\007PCenter\032D\n\005Input"
+      "\n\rPCenter.proto\022\002pb\"\244\002\n\007PCenter\032D\n\005Input"
       "\022(\n\005graph\030\001 \001(\0132\031.pb.PCenter.UndirectGra"
       "ph\022\021\n\tcenterNum\030\002 \001(\005\032\031\n\006Output\022\017\n\007cente"
-      "rs\030\001 \003(\005\032A\n\rUndirectGraph\022\037\n\005edges\030\001 \003(\013"
-      "2\020.pb.PCenter.Edge\022\017\n\007nodeNum\030\002 \001(\005\0326\n\004E"
-      "dge\022\016\n\006source\030\001 \001(\005\022\016\n\006target\030\002 \001(\005\022\016\n\006l"
-      "ength\030\003 \001(\005\"\350\001\n\nSubmission\022\016\n\006author\030\001 \001"
-      "(\t\022\021\n\talgorithm\030\002 \001(\t\022\016\n\006thread\030\003 \001(\t\022\013\n"
-      "\003cpu\030\004 \001(\t\022\013\n\003ram\030\005 \001(\t\022\020\n\010language\030\006 \001("
-      "\t\022\020\n\010compiler\030\007 \001(\t\022\n\n\002os\030\010 \001(\t\022\017\n\007probl"
-      "em\030\025 \001(\t\022\020\n\010instance\030\026 \001(\t\022\020\n\010duration\030\027"
-      " \001(\t\022\013\n\003obj\030\037 \001(\001\022\r\n\005email\030  \001(\t\022\014\n\004date"
-      "\030! \001(\tB\025\n\002pbB\017GateAssignmentsb\006proto3"
+      "rs\030\001 \003(\005\032b\n\rUndirectGraph\022\037\n\005edges\030\001 \003(\013"
+      "2\020.pb.PCenter.Edge\022\017\n\007nodeNum\030\002 \001(\005\022\037\n\005n"
+      "odes\030\003 \003(\0132\020.pb.PCenter.Node\0326\n\004Edge\022\016\n\006"
+      "source\030\001 \001(\005\022\016\n\006target\030\002 \001(\005\022\016\n\006length\030\003"
+      " \001(\005\032\034\n\004Node\022\t\n\001x\030\001 \001(\001\022\t\n\001y\030\002 \001(\001\"\350\001\n\nS"
+      "ubmission\022\016\n\006author\030\001 \001(\t\022\021\n\talgorithm\030\002"
+      " \001(\t\022\016\n\006thread\030\003 \001(\t\022\013\n\003cpu\030\004 \001(\t\022\013\n\003ram"
+      "\030\005 \001(\t\022\020\n\010language\030\006 \001(\t\022\020\n\010compiler\030\007 \001"
+      "(\t\022\n\n\002os\030\010 \001(\t\022\017\n\007problem\030\025 \001(\t\022\020\n\010insta"
+      "nce\030\026 \001(\t\022\020\n\010duration\030\027 \001(\t\022\013\n\003obj\030\037 \001(\001"
+      "\022\r\n\005email\030  \001(\t\022\014\n\004date\030! \001(\tB\025\n\002pbB\017Gat"
+      "eAssignmentsb\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 517);
+      descriptor, 580);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "PCenter.proto", &protobuf_RegisterTypes);
 }
@@ -808,6 +842,7 @@ void PCenter_UndirectGraph::InitAsDefaultInstance() {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int PCenter_UndirectGraph::kEdgesFieldNumber;
 const int PCenter_UndirectGraph::kNodeNumFieldNumber;
+const int PCenter_UndirectGraph::kNodesFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 PCenter_UndirectGraph::PCenter_UndirectGraph()
@@ -820,7 +855,8 @@ PCenter_UndirectGraph::PCenter_UndirectGraph()
 PCenter_UndirectGraph::PCenter_UndirectGraph(const PCenter_UndirectGraph& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      edges_(from.edges_) {
+      edges_(from.edges_),
+      nodes_(from.nodes_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   nodenum_ = from.nodenum_;
   // @@protoc_insertion_point(copy_constructor:pb.PCenter.UndirectGraph)
@@ -859,6 +895,7 @@ void PCenter_UndirectGraph::Clear() {
   (void) cached_has_bits;
 
   edges_.Clear();
+  nodes_.Clear();
   nodenum_ = 0;
   _internal_metadata_.Clear();
 }
@@ -893,6 +930,18 @@ bool PCenter_UndirectGraph::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &nodenum_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated .pb.PCenter.Node nodes = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+                input, add_nodes()));
         } else {
           goto handle_unusual;
         }
@@ -939,6 +988,15 @@ void PCenter_UndirectGraph::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->nodenum(), output);
   }
 
+  // repeated .pb.PCenter.Node nodes = 3;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->nodes_size()); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3,
+      this->nodes(static_cast<int>(i)),
+      output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -966,6 +1024,14 @@ void PCenter_UndirectGraph::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->nodenum(), target);
   }
 
+  // repeated .pb.PCenter.Node nodes = 3;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->nodes_size()); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        3, this->nodes(static_cast<int>(i)), deterministic, target);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -991,6 +1057,17 @@ size_t PCenter_UndirectGraph::ByteSizeLong() const {
       total_size +=
         ::google::protobuf::internal::WireFormatLite::MessageSize(
           this->edges(static_cast<int>(i)));
+    }
+  }
+
+  // repeated .pb.PCenter.Node nodes = 3;
+  {
+    unsigned int count = static_cast<unsigned int>(this->nodes_size());
+    total_size += 1UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          this->nodes(static_cast<int>(i)));
     }
   }
 
@@ -1029,6 +1106,7 @@ void PCenter_UndirectGraph::MergeFrom(const PCenter_UndirectGraph& from) {
   (void) cached_has_bits;
 
   edges_.MergeFrom(from.edges_);
+  nodes_.MergeFrom(from.nodes_);
   if (from.nodenum() != 0) {
     set_nodenum(from.nodenum());
   }
@@ -1059,6 +1137,7 @@ void PCenter_UndirectGraph::Swap(PCenter_UndirectGraph* other) {
 void PCenter_UndirectGraph::InternalSwap(PCenter_UndirectGraph* other) {
   using std::swap;
   CastToBase(&edges_)->InternalSwap(CastToBase(&other->edges_));
+  CastToBase(&nodes_)->InternalSwap(CastToBase(&other->nodes_));
   swap(nodenum_, other->nodenum_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
@@ -1365,6 +1444,267 @@ void PCenter_Edge::InternalSwap(PCenter_Edge* other) {
 }
 
 ::google::protobuf::Metadata PCenter_Edge::GetMetadata() const {
+  protobuf_PCenter_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_PCenter_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void PCenter_Node::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int PCenter_Node::kXFieldNumber;
+const int PCenter_Node::kYFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+PCenter_Node::PCenter_Node()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_PCenter_2eproto::scc_info_PCenter_Node.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:pb.PCenter.Node)
+}
+PCenter_Node::PCenter_Node(const PCenter_Node& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::memcpy(&x_, &from.x_,
+    static_cast<size_t>(reinterpret_cast<char*>(&y_) -
+    reinterpret_cast<char*>(&x_)) + sizeof(y_));
+  // @@protoc_insertion_point(copy_constructor:pb.PCenter.Node)
+}
+
+void PCenter_Node::SharedCtor() {
+  ::memset(&x_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&y_) -
+      reinterpret_cast<char*>(&x_)) + sizeof(y_));
+}
+
+PCenter_Node::~PCenter_Node() {
+  // @@protoc_insertion_point(destructor:pb.PCenter.Node)
+  SharedDtor();
+}
+
+void PCenter_Node::SharedDtor() {
+}
+
+void PCenter_Node::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* PCenter_Node::descriptor() {
+  ::protobuf_PCenter_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_PCenter_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const PCenter_Node& PCenter_Node::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_PCenter_2eproto::scc_info_PCenter_Node.base);
+  return *internal_default_instance();
+}
+
+
+void PCenter_Node::Clear() {
+// @@protoc_insertion_point(message_clear_start:pb.PCenter.Node)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&x_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&y_) -
+      reinterpret_cast<char*>(&x_)) + sizeof(y_));
+  _internal_metadata_.Clear();
+}
+
+bool PCenter_Node::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:pb.PCenter.Node)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // double x = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(9u /* 9 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &x_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // double y = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(17u /* 17 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &y_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:pb.PCenter.Node)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:pb.PCenter.Node)
+  return false;
+#undef DO_
+}
+
+void PCenter_Node::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:pb.PCenter.Node)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // double x = 1;
+  if (this->x() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->x(), output);
+  }
+
+  // double y = 2;
+  if (this->y() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->y(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:pb.PCenter.Node)
+}
+
+::google::protobuf::uint8* PCenter_Node::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:pb.PCenter.Node)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // double x = 1;
+  if (this->x() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->x(), target);
+  }
+
+  // double y = 2;
+  if (this->y() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->y(), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:pb.PCenter.Node)
+  return target;
+}
+
+size_t PCenter_Node::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:pb.PCenter.Node)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // double x = 1;
+  if (this->x() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // double y = 2;
+  if (this->y() != 0) {
+    total_size += 1 + 8;
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void PCenter_Node::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:pb.PCenter.Node)
+  GOOGLE_DCHECK_NE(&from, this);
+  const PCenter_Node* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const PCenter_Node>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:pb.PCenter.Node)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:pb.PCenter.Node)
+    MergeFrom(*source);
+  }
+}
+
+void PCenter_Node::MergeFrom(const PCenter_Node& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:pb.PCenter.Node)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.x() != 0) {
+    set_x(from.x());
+  }
+  if (from.y() != 0) {
+    set_y(from.y());
+  }
+}
+
+void PCenter_Node::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:pb.PCenter.Node)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void PCenter_Node::CopyFrom(const PCenter_Node& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:pb.PCenter.Node)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool PCenter_Node::IsInitialized() const {
+  return true;
+}
+
+void PCenter_Node::Swap(PCenter_Node* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void PCenter_Node::InternalSwap(PCenter_Node* other) {
+  using std::swap;
+  swap(x_, other->x_);
+  swap(y_, other->y_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata PCenter_Node::GetMetadata() const {
   protobuf_PCenter_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_PCenter_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -2539,6 +2879,9 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::pb::PCenter_UndirectGraph* Arena
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::pb::PCenter_Edge* Arena::CreateMaybeMessage< ::pb::PCenter_Edge >(Arena* arena) {
   return Arena::CreateInternal< ::pb::PCenter_Edge >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::pb::PCenter_Node* Arena::CreateMaybeMessage< ::pb::PCenter_Node >(Arena* arena) {
+  return Arena::CreateInternal< ::pb::PCenter_Node >(arena);
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::pb::PCenter* Arena::CreateMaybeMessage< ::pb::PCenter >(Arena* arena) {
   return Arena::CreateInternal< ::pb::PCenter >(arena);

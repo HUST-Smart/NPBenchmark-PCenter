@@ -54,12 +54,15 @@ public:
     #pragma region Constant
 public:
     enum {
-        MaxDistance = (1 << 24),
+        MaxDistance = (1 << 28),
         MaxNodeNum = 5000,
         MaxCenterNum = 5000,
 
         InvalidId = -1,
     };
+
+    static constexpr double TopologicalGraphObjScale = 1;
+    static constexpr double GeometricalGraphObjScale = 100;
     #pragma endregion Constant
 
     #pragma region Constructor
@@ -68,6 +71,9 @@ public:
 
     #pragma region Method
 public:
+    static bool isTopologicalGraph(const pb::PCenter::Input &input) {
+        return input.graph().nodes().empty();
+    }
     #pragma endregion Method
 
     #pragma region Field

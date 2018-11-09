@@ -38,7 +38,7 @@ namespace protobuf_PCenter_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[6];
+  static const ::google::protobuf::internal::ParseTable schema[7];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -55,6 +55,9 @@ extern PCenter_EdgeDefaultTypeInternal _PCenter_Edge_default_instance_;
 class PCenter_Input;
 class PCenter_InputDefaultTypeInternal;
 extern PCenter_InputDefaultTypeInternal _PCenter_Input_default_instance_;
+class PCenter_Node;
+class PCenter_NodeDefaultTypeInternal;
+extern PCenter_NodeDefaultTypeInternal _PCenter_Node_default_instance_;
 class PCenter_Output;
 class PCenter_OutputDefaultTypeInternal;
 extern PCenter_OutputDefaultTypeInternal _PCenter_Output_default_instance_;
@@ -70,6 +73,7 @@ namespace protobuf {
 template<> ::pb::PCenter* Arena::CreateMaybeMessage<::pb::PCenter>(Arena*);
 template<> ::pb::PCenter_Edge* Arena::CreateMaybeMessage<::pb::PCenter_Edge>(Arena*);
 template<> ::pb::PCenter_Input* Arena::CreateMaybeMessage<::pb::PCenter_Input>(Arena*);
+template<> ::pb::PCenter_Node* Arena::CreateMaybeMessage<::pb::PCenter_Node>(Arena*);
 template<> ::pb::PCenter_Output* Arena::CreateMaybeMessage<::pb::PCenter_Output>(Arena*);
 template<> ::pb::PCenter_UndirectGraph* Arena::CreateMaybeMessage<::pb::PCenter_UndirectGraph>(Arena*);
 template<> ::pb::Submission* Arena::CreateMaybeMessage<::pb::Submission>(Arena*);
@@ -404,6 +408,18 @@ class PCenter_UndirectGraph : public ::google::protobuf::Message /* @@protoc_ins
   const ::google::protobuf::RepeatedPtrField< ::pb::PCenter_Edge >&
       edges() const;
 
+  // repeated .pb.PCenter.Node nodes = 3;
+  int nodes_size() const;
+  void clear_nodes();
+  static const int kNodesFieldNumber = 3;
+  ::pb::PCenter_Node* mutable_nodes(int index);
+  ::google::protobuf::RepeatedPtrField< ::pb::PCenter_Node >*
+      mutable_nodes();
+  const ::pb::PCenter_Node& nodes(int index) const;
+  ::pb::PCenter_Node* add_nodes();
+  const ::google::protobuf::RepeatedPtrField< ::pb::PCenter_Node >&
+      nodes() const;
+
   // int32 nodeNum = 2;
   void clear_nodenum();
   static const int kNodeNumFieldNumber = 2;
@@ -415,6 +431,7 @@ class PCenter_UndirectGraph : public ::google::protobuf::Message /* @@protoc_ins
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::RepeatedPtrField< ::pb::PCenter_Edge > edges_;
+  ::google::protobuf::RepeatedPtrField< ::pb::PCenter_Node > nodes_;
   ::google::protobuf::int32 nodenum_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_PCenter_2eproto::TableStruct;
@@ -538,6 +555,116 @@ class PCenter_Edge : public ::google::protobuf::Message /* @@protoc_insertion_po
 };
 // -------------------------------------------------------------------
 
+class PCenter_Node : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:pb.PCenter.Node) */ {
+ public:
+  PCenter_Node();
+  virtual ~PCenter_Node();
+
+  PCenter_Node(const PCenter_Node& from);
+
+  inline PCenter_Node& operator=(const PCenter_Node& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  PCenter_Node(PCenter_Node&& from) noexcept
+    : PCenter_Node() {
+    *this = ::std::move(from);
+  }
+
+  inline PCenter_Node& operator=(PCenter_Node&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PCenter_Node& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const PCenter_Node* internal_default_instance() {
+    return reinterpret_cast<const PCenter_Node*>(
+               &_PCenter_Node_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    4;
+
+  void Swap(PCenter_Node* other);
+  friend void swap(PCenter_Node& a, PCenter_Node& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline PCenter_Node* New() const final {
+    return CreateMaybeMessage<PCenter_Node>(NULL);
+  }
+
+  PCenter_Node* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<PCenter_Node>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const PCenter_Node& from);
+  void MergeFrom(const PCenter_Node& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(PCenter_Node* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // double x = 1;
+  void clear_x();
+  static const int kXFieldNumber = 1;
+  double x() const;
+  void set_x(double value);
+
+  // double y = 2;
+  void clear_y();
+  static const int kYFieldNumber = 2;
+  double y() const;
+  void set_y(double value);
+
+  // @@protoc_insertion_point(class_scope:pb.PCenter.Node)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  double x_;
+  double y_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_PCenter_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
 class PCenter : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:pb.PCenter) */ {
  public:
   PCenter();
@@ -573,7 +700,7 @@ class PCenter : public ::google::protobuf::Message /* @@protoc_insertion_point(c
                &_PCenter_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    5;
 
   void Swap(PCenter* other);
   friend void swap(PCenter& a, PCenter& b) {
@@ -627,6 +754,7 @@ class PCenter : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   typedef PCenter_Output Output;
   typedef PCenter_UndirectGraph UndirectGraph;
   typedef PCenter_Edge Edge;
+  typedef PCenter_Node Node;
 
   // accessors -------------------------------------------------------
 
@@ -674,7 +802,7 @@ class Submission : public ::google::protobuf::Message /* @@protoc_insertion_poin
                &_Submission_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   void Swap(Submission* other);
   friend void swap(Submission& a, Submission& b) {
@@ -1096,6 +1224,36 @@ inline void PCenter_UndirectGraph::set_nodenum(::google::protobuf::int32 value) 
   // @@protoc_insertion_point(field_set:pb.PCenter.UndirectGraph.nodeNum)
 }
 
+// repeated .pb.PCenter.Node nodes = 3;
+inline int PCenter_UndirectGraph::nodes_size() const {
+  return nodes_.size();
+}
+inline void PCenter_UndirectGraph::clear_nodes() {
+  nodes_.Clear();
+}
+inline ::pb::PCenter_Node* PCenter_UndirectGraph::mutable_nodes(int index) {
+  // @@protoc_insertion_point(field_mutable:pb.PCenter.UndirectGraph.nodes)
+  return nodes_.Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField< ::pb::PCenter_Node >*
+PCenter_UndirectGraph::mutable_nodes() {
+  // @@protoc_insertion_point(field_mutable_list:pb.PCenter.UndirectGraph.nodes)
+  return &nodes_;
+}
+inline const ::pb::PCenter_Node& PCenter_UndirectGraph::nodes(int index) const {
+  // @@protoc_insertion_point(field_get:pb.PCenter.UndirectGraph.nodes)
+  return nodes_.Get(index);
+}
+inline ::pb::PCenter_Node* PCenter_UndirectGraph::add_nodes() {
+  // @@protoc_insertion_point(field_add:pb.PCenter.UndirectGraph.nodes)
+  return nodes_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::pb::PCenter_Node >&
+PCenter_UndirectGraph::nodes() const {
+  // @@protoc_insertion_point(field_list:pb.PCenter.UndirectGraph.nodes)
+  return nodes_;
+}
+
 // -------------------------------------------------------------------
 
 // PCenter_Edge
@@ -1140,6 +1298,38 @@ inline void PCenter_Edge::set_length(::google::protobuf::int32 value) {
   
   length_ = value;
   // @@protoc_insertion_point(field_set:pb.PCenter.Edge.length)
+}
+
+// -------------------------------------------------------------------
+
+// PCenter_Node
+
+// double x = 1;
+inline void PCenter_Node::clear_x() {
+  x_ = 0;
+}
+inline double PCenter_Node::x() const {
+  // @@protoc_insertion_point(field_get:pb.PCenter.Node.x)
+  return x_;
+}
+inline void PCenter_Node::set_x(double value) {
+  
+  x_ = value;
+  // @@protoc_insertion_point(field_set:pb.PCenter.Node.x)
+}
+
+// double y = 2;
+inline void PCenter_Node::clear_y() {
+  y_ = 0;
+}
+inline double PCenter_Node::y() const {
+  // @@protoc_insertion_point(field_get:pb.PCenter.Node.y)
+  return y_;
+}
+inline void PCenter_Node::set_y(double value) {
+  
+  y_ = value;
+  // @@protoc_insertion_point(field_set:pb.PCenter.Node.y)
 }
 
 // -------------------------------------------------------------------
@@ -1856,6 +2046,8 @@ inline void Submission::set_allocated_date(::std::string* date) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

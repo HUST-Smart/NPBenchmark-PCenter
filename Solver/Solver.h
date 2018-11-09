@@ -206,6 +206,8 @@ public:
     Problem::Output output;
 
     struct { // auxiliary data for solver.
+        double objScale;
+
         Arr2D<Length> adjMat; // adjMat[i][j] is the distance of the edge which goes from i to j.
         Arr<Length> coverRadii; // coverRadii[n] is the length of its shortest serve arc.
     } aux;

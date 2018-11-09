@@ -27,15 +27,22 @@ message PCenter {
     repeated int32 centers = 1; // 服务节点列表.
   }
 
-  message UndirectGraph { // 无向图信息. 节点从 0 开始连续编号.
-    repeated Edge edges = 1; // 边列表.
+  message UndirectGraph { // 无向图信息. 节点从 0 开始连续编号. edges 与 nodes 仅有一个非空.
+    repeated Edge edges = 1; // 边列表. 仅在 nodes 为空时有效.
     int32 nodeNum = 2; // 节点数.
+
+    repeated Node nodes = 3; // 节点列表. 非空时 edges 失效.
   }
 
   message Edge { // 边信息.
     int32 source = 1; // 边的源节点编号.
     int32 target = 2; // 边的宿节点编号.
     int32 length = 3; // 边的长度.
+  }
+
+  message Node { // 节点信息.
+    double x = 1; // 横坐标.
+    double y = 2; // 纵坐标.
   }
 }
 
