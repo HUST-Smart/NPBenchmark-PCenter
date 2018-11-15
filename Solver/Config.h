@@ -14,7 +14,9 @@
 #define _OS_MS_WINDOWS  1
 #define _CC_MS_VC  1
 
-#if _MSC_VER >= 1900
+#if _MSC_VER >= 1910
+#define _CC_VERSION  2017
+#elif _MSC_VER >= 1900
 #define _CC_VERSION  2015
 #elif _MSC_VER >= 1800
 #define _CC_VERSION  2013

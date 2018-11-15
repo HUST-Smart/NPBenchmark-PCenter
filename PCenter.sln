@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Solver", "Solver\Solver.vcxproj", "{56943A84-2134-44AE-81B9-990E01250A48}"
+	ProjectSection(ProjectDependencies) = postProject
+		{03FDAE50-62C6-463A-8235-764094E593E7} = {03FDAE50-62C6-463A-8235-764094E593E7}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Simulator", "Simulator\Simulator.vcxproj", "{6F05DAC1-4FEF-4D11-B177-4FB26A217AE8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{03FDAE50-62C6-463A-8235-764094E593E7} = {03FDAE50-62C6-463A-8235-764094E593E7}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Checker", "Checker\Checker.vcxproj", "{03FDAE50-62C6-463A-8235-764094E593E7}"
 EndProject
@@ -66,5 +72,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {938D9F49-E12A-4FD6-96A7-E3E656C30923}
 	EndGlobalSection
 EndGlobal
