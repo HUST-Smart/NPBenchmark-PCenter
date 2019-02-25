@@ -12,7 +12,7 @@ syntax = "proto3";
 package pb;
 
 option java_package = "pb";
-option java_outer_classname = "GateAssignments";
+option java_outer_classname = "PCenter";
 // option cc_enable_arenas = true;
 
 
