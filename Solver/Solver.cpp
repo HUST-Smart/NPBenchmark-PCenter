@@ -219,7 +219,9 @@ void Solver::record() const {
         << generation << "," << iteration << ",";
 
     // record solution vector.
-    // EXTEND[szx][2]: save solution in log.
+    for (auto c = output.centers().begin(); c != output.centers().end(); ++c) {
+        log << *c << " ";
+    }
     log << endl;
 
     // append all text atomically.

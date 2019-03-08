@@ -21,7 +21,7 @@
 namespace pb {
 
 template<typename T>
-std::string protobufToJson(const T &obj, bool pretty = true) {
+std::string protobufToJson(const T &obj, bool pretty = false) {
     std::string data;
 
     google::protobuf::util::JsonPrintOptions options;
