@@ -287,7 +287,7 @@ void Solver::init() {
             double ny = input.graph().nodes(n).y();
             for (ID m = 0; m < nodeNum; ++m) {
                 if (n == m) { continue; }
-                aux.adjMat.at(n, m) = static_cast<Length>(aux.objScale * hypot(
+                aux.adjMat.at(n, m) = lround(aux.objScale * hypot(
                     nx - input.graph().nodes(m).x(), ny - input.graph().nodes(m).y()));
             }
         }
